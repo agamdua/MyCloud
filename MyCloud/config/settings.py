@@ -60,7 +60,7 @@ DATABASES = {'default': dj_database_url.config()}
 if DATABASES == {'default': {}}:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.sqlite3',
             'NAME': "MyCloud",
         }
     }
@@ -154,6 +154,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'users',  # custom users app
     # Your stuff: custom apps go here
+    'folderstore'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -287,7 +288,7 @@ else:
     EMAIL_USE_TLS = True
     SERVER_EMAIL = EMAIL_HOST_USER
     ########## END EMAIL
-    
+
     ########## CACHING
     from memcacheify import memcacheify
     CACHES = memcacheify()
@@ -328,7 +329,7 @@ else:
             'django.template.loaders.app_directories.Loader',
         )),
     )
-    
+
 # See: http://django-crispy-forms.readthedocs.org/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 ########## END TEMPLATE CONFIGURATION
