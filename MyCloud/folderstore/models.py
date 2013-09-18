@@ -10,7 +10,7 @@ class FolderUpload(MPTTModel):
 
     name=models.CharField(max_length=100)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
-    user = models.ForeignKey(User)
+    user = models.ManyToManyField('users.User')
     # ManyToMany: file sharing between users will be a feature in the future
 
     class Meta:
@@ -25,10 +25,8 @@ class FileUpload(models.Model):
     They will be linked to a particular folder.'''
 
     folder = TreeOneToOneField(FolderUpload)
-    upload_location = 'uploads/%s' %(folder.name)
-
-    file_upload=models.FileField(upload_to=upload_location, blank=True)
-    user = models.ForeignKey(User)
+    user = models.ManyToManyField('users.User')
+    file_upload=models.FileField(upload_to=lambda instance, filename: 'uploads/{0}/{1}/{2}'.format(instance.user.name, instance.folder.name, filename))
     rename = models.CharField(max_length=200, blank=True)
 
     def __unicode__(self):
