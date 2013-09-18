@@ -148,6 +148,7 @@ THIRD_PARTY_APPS = (
     'south',  # Database migration helpers:
     'crispy_forms',  # Form layouts
     'avatar',  # for user avatars
+    'mptt' # for trees in database
 )
 
 # Apps specific for this project go here.
